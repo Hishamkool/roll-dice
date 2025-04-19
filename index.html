@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>   
+    <head>
+        
+        <link rel="stylesheet" href="css/style.css">
+        <title>
+          Dice Game  
+        </title>
+    </head>
+    <body class="body" >
+        <h1>
+            ROLL DICE
+        </h1>
+
+        <div id="diceFace" class="dice" >
+            <img id="Face" src="images/Red-Dice-PNG-Transparent-File.png" alt="Dice" height="130">        
+        </div>
+        
+        <div id="boxone" class="boxone">
+            <div class="input">
+                   <b>
+                       PLAYER 1
+                   </b> 
+            </div>
+            <div class="subinput">
+                <div class="one">
+                    Total Score
+                    <div id="ts1" class="scoreone">
+                        0
+                    </div>
+                </div>  
+                <div class="two">
+                    Current Score
+                    <div id="cs1" class="scoreone">
+                        0
+                    </div>
+                </div>
+            </div>
+            <div  class="rollon">
+                <button type="button" id="rollOne" class="button" onclick="rollOne()">Roll On </button>
+            </div>
+        </div>
+        
+        <div class="vs">
+            <img src="images/vs.png" alt="VS" height="70">
+        </div>
+
+        <div id="boxtwo" class="boxtwo">
+            <div class="input">
+                <b>
+                    PLAYER 2
+                </b> 
+            </div>
+            <div class="subinput">
+                <div class="one">
+                    Total Score
+                    <div id="ts2" class="scoreone">
+                        0
+                    </div>
+                </div>
+                <div class="two">
+                    Current Score
+                    <div id="cs2" class="scoreone">
+                        0
+                    </div>
+                </div>
+            </div>
+            <div class="rollon">
+                <!-- <button class="button">Roll On</button>     -->
+                <button type="button" id="rollTwo" class="button" onclick="rollTwo()">Roll On </button>
+            </div>
+        </div>
+        
+        <div class="buttons">
+          
+
+            <!-- <button type="button" id="start" class="start" onclick="GameStart()">Start </button> -->
+            <input type="button" class="start" value="START" id="start" onclick="GameStart()"></input> 
+
+
+            <!-- <button type="button" class="hold">Hold </button> -->
+            <input type="button" class="hold" value="HOLD" id="hold" onclick="hold()"></input> 
+           
+        </div>
+        <script src="js/java.js"></script>
+    </body>
+</html>
