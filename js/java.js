@@ -17,6 +17,8 @@ var boxTwo = document.getElementById("boxtwo");
 
 var start = document.getElementById("start");
 var diceLogo = document.getElementById("Face");
+
+var versusImg = document.getElementById("versusImg");
 // disabling all buttons initially 
 disableAllButtons();
 function disableAllButtons() {
@@ -36,6 +38,9 @@ function updateButtons() {
 
         rollBtnTwo.disabled = true;
         holdBtnTwo.disabled = true;
+        //scrolling to the first player
+        // rollBtnOne.scrollIntoView();
+        scrollToActiveLocation();
     }
     if (activeplayer == 1) {
         rollBtnOne.disabled = true;
@@ -43,14 +48,14 @@ function updateButtons() {
 
         rollBtnTwo.disabled = false;
         holdBtnTwo.disabled = false;
+
+        //scrolling to the second player
+        // rollBtnTwo.scrollIntoView();
+        scrollToActiveLocation();
     }
-
 }
-
-// when start button is clicked
-function GameStart() {
-
-
+// function to clear the scoreboard -usually while starting the game
+function clearAllValues() {
     cs[0] = 0;
     cs[1] = 0;
     ts[0] = 0;
@@ -59,12 +64,21 @@ function GameStart() {
     document.getElementById("cs1").innerHTML = 0;
     document.getElementById("ts1").innerHTML = 0;
     document.getElementById("ts2").innerHTML = 0;
+}
+// start and stop button click
+function GameStart() {
+
+    versusImg.style.height = "120px";
+
 
     if (!running) {
+        //clearing values only while starting not stoping so that we can see our scores onces finished
+        clearAllValues();
+
         flag = 1;
         // alert("Game has started");
         start.style.background = 'red ';
-        start.value = "STOP";
+        start.value = "Stop Game";
         if (activeplayer == 0) {
             boxOne.style.boxShadow = "0px 0px  30px 15px lightgreen";
             boxTwo.style.boxShadow = "";
@@ -80,15 +94,19 @@ function GameStart() {
     }
     else if (running) {
         stopGame();
-        diceLogo.src = "images/Red-Dice-PNG-Transparent-File.png";
-
     }
 
 
 }
 
-// function to stop game
+// function to stop game - called withing js
 function stopGame() {
+    versusImg.style.height = "40px";
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+    });
     running = false;
     flag = 0;
     activeplayer = 0;
@@ -97,59 +115,77 @@ function stopGame() {
 
     boxOne.style.boxShadow = "";
     boxTwo.style.boxShadow = "";
-    diceLogo.src = "images/Red-Dice-PNG-Transparent-File.png";
+    versusImg.src = "images/vs.png";
     start.style.background = '#33B30F';
-    start.value = "START";
+    start.value = "Start Game";
 
 }
 
+let diceRotation = 0;
+// animating the dices
+function diceRoatationAnimation() {
 
+    // animation with rotation and scale
+    // versusImg.classList.remove("diceThrown");
+    // void versusImg.offsetWidth;
+    // versusImg.classList.add("diceThrown");
+    
+    
+    //animation with only rotation
+    diceRotation = diceRotation + 360;
+    versusImg.style.transition = ` transform 0.6s ease-out`;
+    versusImg.style.transform = `rotateZ(${diceRotation}deg)`;
+}
+
+
+// function to roll dice for first player
 function rollOne() {
+    diceRoatationAnimation();
+
+    // runing and active player = 0
     if (flag == 1 && activeplayer == 0) {
 
-        // var df=diceLogo;
-        // df.style.color= 'white';
-        var no = Math.floor((Math.random() * 6) + 1);
 
-        // boxOne.style.boxShadow="0px 0px  30px 15px lightgreen";
-        if (no == 1) {
-            diceLogo.src = "images/1.png";
+        var diceValue = Math.floor((Math.random() * 6) + 1);
+
+        if (diceValue == 1) {
+            versusImg.src = "images/1dice.png"; 
 
         }
-        if (no == 2) {
-            diceLogo.src = "images/2.png";
+        if (diceValue == 2) {
+            versusImg.src = "images/2.png";
         }
-        if (no == 3) {
-            diceLogo.src = "images/3.png";
+        if (diceValue == 3) {
+            versusImg.src = "images/3.png";
         }
-        if (no == 4) {
-            diceLogo.src = "images/4.png";
+        if (diceValue == 4) {
+            versusImg.src = "images/4.png";
         }
-        if (no == 5) {
-            diceLogo.src = "images/5.png";
+        if (diceValue == 5) {
+            versusImg.src = "images/5.png";
         }
-        if (no == 6) {
-            diceLogo.src = "images/6.png";
+        if (diceValue == 6) {
+            versusImg.src = "images/6.png";
         }
         //adding values when not equal to 1
-        if (no != 1) {
+        if (diceValue != 1) {
 
-            cs[0] = cs[0] + no;
+            cs[0] = cs[0] + diceValue;
             document.getElementById("cs1").innerHTML = cs[0];
 
         }
         //set current score to zero when we get one on dice
-        /*   if (no == 1) {
-              // sum=0;
-              cs[0] = 0;
-  
-              // alert("nextplayer")
-              document.getElementById("cs1").innerHTML = cs[0];
-              boxOne.style.boxShadow = "";
-              boxTwo.style.boxShadow = "0px 0px  30px 15px lightgreen";
-              activeplayer = 1;
-              updateButtons();
-          } */
+        if (diceValue == 1) {
+            // sum=0;
+            cs[0] = 0;
+
+            // alert("nextplayer")
+            document.getElementById("cs1").innerHTML = cs[0];
+            boxOne.style.boxShadow = "";
+            boxTwo.style.boxShadow = "0px 0px  30px 15px lightgreen";
+            activeplayer = 1;
+            updateButtons();
+        }
 
 
 
@@ -157,49 +193,51 @@ function rollOne() {
     }
 
 }
+// function to roll dice for second  player
 
 function rollTwo() {
+    diceRoatationAnimation();
     if (flag == 1 && activeplayer == 1) {
 
-        var no = Math.floor((Math.random() * 6) + 1);
+        var diceValue = Math.floor((Math.random() * 6) + 1);
 
 
-        if (no == 1) {
-            diceLogo.src = "images/1.png";
+        if (diceValue == 1) {
+            versusImg.src = "images/1dice.png";
 
         }
-        if (no == 2) {
-            diceLogo.src = "images/2.png";
+        if (diceValue == 2) {
+            versusImg.src = "images/2.png";
         }
-        if (no == 3) {
-            diceLogo.src = "images/3.png";
+        if (diceValue == 3) {
+            versusImg.src = "images/3.png";
         }
-        if (no == 4) {
-            diceLogo.src = "images/4.png";
+        if (diceValue == 4) {
+            versusImg.src = "images/4.png";
         }
-        if (no == 5) {
-            diceLogo.src = "images/5.png";
+        if (diceValue == 5) {
+            versusImg.src = "images/5.png";
         }
-        if (no == 6) {
-            diceLogo.src = "images/6.png";
+        if (diceValue == 6) {
+            versusImg.src = "images/6.png";
         }
 
-        if (no != 1) {
+        if (diceValue != 1) {
 
-            cs[1] = cs[1] + no;
+            cs[1] = cs[1] + diceValue;
             document.getElementById("cs2").innerHTML = cs[1];
         }
-        /*   if (no == 1) {
-  
-              cs[1] = 0;
-              // alert("nextplayer")
-  
-              document.getElementById("cs2").innerHTML = cs[1];
-              boxOne.style.boxShadow = "0px 0px  30px 15px lightgreen";
-              boxTwo.style.boxShadow = "";
-              activeplayer = 0;
-              updateButtons();
-          } */
+        if (diceValue == 1) {
+
+            cs[1] = 0;
+            // alert("nextplayer")
+
+            document.getElementById("cs2").innerHTML = cs[1];
+            boxOne.style.boxShadow = "0px 0px  30px 15px lightgreen";
+            boxTwo.style.boxShadow = "";
+            activeplayer = 0;
+            updateButtons();
+        }
 
 
 
@@ -246,6 +284,34 @@ function hold() {
     }
 
 }
+
+//function to scroll the screen when switching players
+function scrollToActiveLocation() {
+
+    const rollBtnOneLocation = rollBtnOne.getBoundingClientRect().top + window.scrollY;
+    const rolBtnTwoLocation = rollBtnTwo.getBoundingClientRect().top + window.scrollY;
+    const diceBottomLocation = diceLogo.getBoundingClientRect().bottom + window.scrollY;
+    if (activeplayer == 0) {
+        window.scrollTo({
+            // top: rollBtnOneLocation - 200,
+            // top: rollBtnOneLocation ,
+            top: diceBottomLocation,
+            behavior: "smooth",
+
+        });
+    } else if (activeplayer == 1) {
+        window.scrollTo({
+            top: rolBtnTwoLocation + 50,
+            behavior: "smooth",
+        });
+    }
+
+
+
+
+}
+
+
 
 
 

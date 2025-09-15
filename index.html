@@ -4,6 +4,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap"
+        rel="stylesheet">
     <title>
         Dice Game
     </title>
@@ -45,7 +51,7 @@
             </div>
         </div>
         <div class="vs">
-            <img src="images/vs.png" alt="VS">
+            <img src="images/vs.png" alt="VS" id="versusImg">
         </div>
         <div id="boxtwo" class="boxtwo">
             <div class="input">
@@ -75,9 +81,9 @@
         </div>
     </main>
 
-    <div class="buttons">
+    <div class="Start-Hold">
 
-        <input type="button" class="start" value="START" id="start" onclick="GameStart()"></input>
+        <input type="button" class="start" value="Start Game" id="start" onclick="GameStart()"></input>
 
         <!-- <input type="button" class="hold" value="HOLD" id="hold" onclick="hold()"></input> -->
 
