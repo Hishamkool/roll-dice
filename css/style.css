@@ -149,6 +149,7 @@ body>main {
   }
 
 }
+
 /*  */
 
 
@@ -202,4 +203,15 @@ input[type="button"]:disabled {
 }
 
 
-@media screen and (min-width:768px) {}
+@media screen and (min-width:768px) {
+  main { 
+    flex-direction: row; 
+    justify-content: space-evenly; 
+    gap: 25px; 
+    padding-inline: 10%;
+  }
+  #Face{
+    height: 90px;
+  }
+
+}

@@ -17,6 +17,7 @@ var boxTwo = document.getElementById("boxtwo");
 
 var start = document.getElementById("start");
 var diceLogo = document.getElementById("Face");
+let shouldScroll = true; //should scroll to active location when taping on rollon
 
 var versusImg = document.getElementById("versusImg");
 // disabling all buttons initially 
@@ -30,8 +31,8 @@ function disableAllButtons() {
 
 //enabling and disabling buttons while switching players
 function updateButtons() {
-
-
+    // returns true if tablet
+    const isTablet = checkIfTablet();
     if (activeplayer == 0) {
         rollBtnOne.disabled = false;
         holdBtnOne.disabled = false;
@@ -40,7 +41,11 @@ function updateButtons() {
         holdBtnTwo.disabled = true;
         //scrolling to the first player
         // rollBtnOne.scrollIntoView();
-        scrollToActiveLocation();
+        //if not tablet then scroll
+        if (!isTablet) {
+            scrollToActiveLocation();
+        }
+
     }
     if (activeplayer == 1) {
         rollBtnOne.disabled = true;
@@ -51,7 +56,11 @@ function updateButtons() {
 
         //scrolling to the second player
         // rollBtnTwo.scrollIntoView();
-        scrollToActiveLocation();
+        //if not tablet then scroll
+        if (!isTablet) {
+            scrollToActiveLocation();
+        }
+
     }
 }
 // function to clear the scoreboard -usually while starting the game
@@ -68,7 +77,14 @@ function clearAllValues() {
 // start and stop button click
 function GameStart() {
 
-    versusImg.style.height = "120px";
+
+    const targetImage = chooseTargetImage();
+
+    if (targetImage == versusImg) {
+        // versusImg.style.transform = `rotate(0deg) scale(3)`;
+        versusImg.style.height = "120px";
+
+    }
 
 
     if (!running) {
@@ -102,6 +118,8 @@ function GameStart() {
 // function to stop game - called withing js
 function stopGame() {
     versusImg.style.height = "40px";
+    // versusImg.style.transform = `rotate(0deg) scale(1)`;
+
     window.scrollTo({
         top: 0,
         left: 0,
@@ -116,6 +134,7 @@ function stopGame() {
     boxOne.style.boxShadow = "";
     boxTwo.style.boxShadow = "";
     versusImg.src = "images/vs.png";
+    diceLogo.src = "images/Red-Dice-PNG-Transparent-File.png";
     start.style.background = '#33B30F';
     start.value = "Start Game";
 
@@ -124,20 +143,58 @@ function stopGame() {
 let diceRotation = 0;
 // animating the dices
 function diceRoatationAnimation() {
+    const targetImage = chooseTargetImage();
 
     // animation with rotation and scale
     // versusImg.classList.remove("diceThrown");
     // void versusImg.offsetWidth;
     // versusImg.classList.add("diceThrown");
-    
-    
+
+
     //animation with only rotation
     diceRotation = diceRotation + 360;
-    versusImg.style.transition = ` transform 0.6s ease-out`;
-    versusImg.style.transform = `rotateZ(${diceRotation}deg)`;
+    targetImage.style.transition = ` transform 0.6s ease-out`;
+    targetImage.style.transform = `rotateZ(${diceRotation}deg)`;
+
+    /*  //trying with scale 
+     diceRotation += 360; // increment rotation
+     const scale = mediaQuery.matches ? 1 : 3; // scale depending on screen 
+     // combine rotation + scale in a single transform
+     targetImage.style.transition = "transform 0.6s ease-out";
+     targetImage.style.transform = `rotate(${diceRotation}deg) scale(${scale})`; */
 }
 
+const mediaQuery = window.matchMedia("(min-width:768px)");
 
+mediaQuery.addEventListener("change", checkIfTablet);
+
+//function to notify changes of screensizes
+function checkIfTablet() {
+    chooseTargetImage();
+    return mediaQuery.matches ? true : false;
+
+
+}
+
+// function to choose the target image based on the screen size 
+function chooseTargetImage() {
+    if (mediaQuery.matches) {
+
+        var targetImage = diceLogo;
+        // versusImg.style.transform = `rotate(0deg) scale(1)`;
+        versusImg.style.height = "40px";
+
+        versusImg.src = "images/vs.png";
+
+    } else {
+        var targetImage = versusImg;
+        // versusImg.style.transform = `rotate(0deg) scale(3)`;
+        versusImg.style.height = "120px";
+        diceLogo.src = "images/Red-Dice-PNG-Transparent-File.png";
+    }
+    return targetImage;
+
+}
 // function to roll dice for first player
 function rollOne() {
     diceRoatationAnimation();
@@ -145,27 +202,27 @@ function rollOne() {
     // runing and active player = 0
     if (flag == 1 && activeplayer == 0) {
 
-
         var diceValue = Math.floor((Math.random() * 6) + 1);
+        const targetImage = chooseTargetImage();
 
         if (diceValue == 1) {
-            versusImg.src = "images/1dice.png"; 
+            targetImage.src = "images/1dice.png";
 
         }
         if (diceValue == 2) {
-            versusImg.src = "images/2.png";
+            targetImage.src = "images/2.png";
         }
         if (diceValue == 3) {
-            versusImg.src = "images/3.png";
+            targetImage.src = "images/3.png";
         }
         if (diceValue == 4) {
-            versusImg.src = "images/4.png";
+            targetImage.src = "images/4.png";
         }
         if (diceValue == 5) {
-            versusImg.src = "images/5.png";
+            targetImage.src = "images/5.png";
         }
         if (diceValue == 6) {
-            versusImg.src = "images/6.png";
+            targetImage.src = "images/6.png";
         }
         //adding values when not equal to 1
         if (diceValue != 1) {
@@ -193,33 +250,33 @@ function rollOne() {
     }
 
 }
-// function to roll dice for second  player
 
+// function to roll dice for second  player
 function rollTwo() {
     diceRoatationAnimation();
     if (flag == 1 && activeplayer == 1) {
 
         var diceValue = Math.floor((Math.random() * 6) + 1);
-
+        const targetImage = chooseTargetImage();
 
         if (diceValue == 1) {
-            versusImg.src = "images/1dice.png";
+            targetImage.src = "images/1dice.png";
 
         }
         if (diceValue == 2) {
-            versusImg.src = "images/2.png";
+            targetImage.src = "images/2.png";
         }
         if (diceValue == 3) {
-            versusImg.src = "images/3.png";
+            targetImage.src = "images/3.png";
         }
         if (diceValue == 4) {
-            versusImg.src = "images/4.png";
+            targetImage.src = "images/4.png";
         }
         if (diceValue == 5) {
-            versusImg.src = "images/5.png";
+            targetImage.src = "images/5.png";
         }
         if (diceValue == 6) {
-            versusImg.src = "images/6.png";
+            targetImage.src = "images/6.png";
         }
 
         if (diceValue != 1) {
