@@ -23,8 +23,8 @@ var diceLogo = document.getElementById("Face");
 let shouldScroll = true; //should scroll to active location when taping on rollon
 
 var versusImg = document.getElementById("versusImg");
- 
- 
+
+
 
 /* input fields */
 const playerOneName = document.getElementById("player-one-name");
@@ -55,7 +55,7 @@ function setUsers() {
     }
     closePopUp();
 }
- 
+
 /* function to show popup */
 function showPopup() {
     popUpContent.classList.add("open");
@@ -135,7 +135,7 @@ function GameStart() {
 
     if (!running) {
         /* show popup only when game not already running  */
-        showPopup(); 
+        showPopup();
         //clearing values only while starting not stoping so that we can see our scores onces finished
         clearAllValues();
 
@@ -165,7 +165,13 @@ function GameStart() {
 
 // function to stop game - called withing js
 function stopGame() {
-    versusImg.style.height = "40px";
+    if (mediaQuery.matches) {
+        versusImg.style.height = "70px";
+        
+    }else{
+        
+        versusImg.style.height = "40px";
+    }
     // versusImg.style.transform = `rotate(0deg) scale(1)`;
 
     window.scrollTo({
@@ -234,14 +240,11 @@ function checkIfTablet() {
 
 }
 
-// function to choose the target image based on the screen size 
+// function to choose the target image to show dice based on the screen size 
 function chooseTargetImage() {
     if (mediaQuery.matches) {
-
-        var targetImage = diceLogo;
-        // versusImg.style.transform = `rotate(0deg) scale(1)`;
-        versusImg.style.height = "40px";
-
+        var targetImage = diceLogo; 
+        // versusImg.style.height = "40px"; 
         versusImg.src = "images/vs.png";
 
     } else {
