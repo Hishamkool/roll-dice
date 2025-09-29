@@ -31,7 +31,7 @@ body {
 }
 
 .popUpContent {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: start;
   justify-content: flex-start;
@@ -42,19 +42,33 @@ body {
   z-index: 10;
   position: fixed;
   top: 50%;
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
   left: 0;
   right: 0;
- 
+
   max-height: 90%;
   /* scrollbar-width: none; */
   padding: 15px 25px;
   gap: 16px;
+  animation: popupAnimation 0.9s ease forwards;
 }
 
-/* when clicking close button */
-.popUpContent.close {
-  display: none;
+@keyframes popupAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+}
+
+
+
+.popUpContent.open {
+  display: flex;
 }
 
 /* all items inside popup content */
@@ -91,8 +105,9 @@ body {
   cursor: pointer;
 
 }
-.btnClosePopUp:hover{ 
-  background-color: rgb(85, 2, 2); 
+
+.btnClosePopUp:hover {
+  background-color: rgb(85, 2, 2);
 }
 
 
@@ -132,7 +147,7 @@ body {
 
 }
 
-.inputName input { 
+.inputName input {
   width: 100%;
   min-width: 150px;
   padding: 8px;
@@ -143,8 +158,8 @@ body {
 
 .how-to-play ol {
   padding-left: 20px;
-   overflow-y: auto;
-   max-height: 20vh;
+  overflow-y: auto;
+  max-height: 20vh;
 }
 
 #submit-user {
@@ -159,8 +174,9 @@ body {
   color: white;
   cursor: pointer;
 }
-#submit-user:hover{
-  filter: brightness(1.2); 
+
+#submit-user:hover {
+  filter: brightness(1.2);
 }
 
 

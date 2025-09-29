@@ -7,7 +7,7 @@ let ts = [0, 0]; //total score list
 const limit = 20;
 var flag = 0;
 /* change debugDontSkipAtOne flag to "false" when on production or hosting */
-const debugDontSkipAtOne = true;
+const debugDontSkipAtOne = false;
 
 
 var rollBtnOne = document.getElementById("rollOne");
@@ -23,8 +23,8 @@ var diceLogo = document.getElementById("Face");
 let shouldScroll = true; //should scroll to active location when taping on rollon
 
 var versusImg = document.getElementById("versusImg");
-/* instructions button */
-const btnShowPopUp = document.getElementById("btnShowPopUp");
+ 
+ 
 
 /* input fields */
 const playerOneName = document.getElementById("player-one-name");
@@ -39,10 +39,7 @@ const submitUserBtn = document.getElementById("submit-user");
 
 const popUpContent = document.querySelector(".popUpContent");
 /* to show and hide the popup  */
-btnShowPopUp.addEventListener("click", () => {
-    popUpContent.classList.toggle("close");
-    enableLog && console.log(popUpContent);
-});
+
 /* default names */
 let Player1 = "PLAYER 1";
 let Player2 = "PLAYER 2";
@@ -58,10 +55,15 @@ function setUsers() {
     }
     closePopUp();
 }
-
+ 
+/* function to show popup */
+function showPopup() {
+    popUpContent.classList.add("open");
+}
 /* function to close popup */
 function closePopUp() {
-    popUpContent.classList.add("close");
+    popUpContent.classList.remove("open");
+    console.log(popUpContent);
 }
 
 // disabling all buttons initially 
@@ -132,6 +134,8 @@ function GameStart() {
 
 
     if (!running) {
+        /* show popup only when game not already running  */
+        showPopup(); 
         //clearing values only while starting not stoping so that we can see our scores onces finished
         clearAllValues();
 
