@@ -20,6 +20,42 @@
         ROLL DICE
     </h1>
 
+    <!-- popup to store the names and show instructions of the game -->
+    <button class="btnShowPopUp" id="btnShowPopUp">Instructions</button>
+    <div class="popUpContent">
+        <div class="pp-head">
+            <span>Welcome To Roll A Dice Game</span>
+            <button class="btnClosePopUp" id="btnClosePopUp" onclick="closePopUp()">
+                Close
+            </button>
+        </div>
+        <div class="userDetails">
+            <h2>Enter User details: </h2>
+            <div class="inputName">
+                <label>Player One:
+                    <input name="player1" id="player-one-name" type="text" placeholder="Name of player one">
+                </label>
+
+                <label for="player-two-name">Player Two:
+                    <input name="player2" id="player-two-name" type="text" placeholder="Name of player two">
+                </label> 
+            </div> 
+        </div>
+        <button class="submit-user" id="submit-user" onclick="setUsers()"> Submit</button>
+
+        <div class="how-to-play">
+            <h2>How to Play?</h2>
+            <ol>
+                <li>The first player to score 100 wins (Total score).</li>
+                <li>Everytime you through the dice the value gets added up to the current score until you get "ONE" on
+                    the dice.</li>
+                <li>if you get "ONE" on your dice your chance is over and all you current score is cleared.</li>
+                <li>Be wise and hold your current score, to save it as you total score.</li>
+            </ol>
+        </div>
+    </div>
+    <!-- 🔝poup -->
+
     <div id="diceFace" class="dice">
         <img id="Face" src="images/Red-Dice-PNG-Transparent-File.png" alt="Dice">
     </div>
@@ -27,7 +63,7 @@
     <main>
         <div id="boxone" class="boxone">
             <div class="input">
-                <b>
+                <b id="player-one-placeholder">
                     PLAYER 1
                 </b>
             </div>
@@ -55,7 +91,7 @@
         </div>
         <div id="boxtwo" class="boxtwo">
             <div class="input">
-                <b>
+                <b id="player-two-placeholder">
                     PLAYER 2
                 </b>
             </div>

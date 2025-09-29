@@ -30,6 +30,141 @@ body {
   flex-direction: column;
 }
 
+.popUpContent {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  margin-inline: auto;
+  max-width: clamp(100px, 80vw, 500px);
+  border-radius: 15px;
+  background-color: white;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+ 
+  max-height: 90%;
+  /* scrollbar-width: none; */
+  padding: 15px 25px;
+  gap: 16px;
+}
+
+/* when clicking close button */
+.popUpContent.close {
+  display: none;
+}
+
+/* all items inside popup content */
+.popUpContent * {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.popUpContent h2 {
+  font-size: 17px;
+}
+
+/* heading container */
+.pp-head {
+  box-sizing: content-box;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  width: 100%;
+
+}
+
+/* close button */
+.btnClosePopUp {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 5px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background-color: rgb(5, 37, 180);
+  color: white;
+  font-weight: 600;
+  border-color: grey;
+  cursor: pointer;
+
+}
+.btnClosePopUp:hover{ 
+  background-color: rgb(85, 2, 2); 
+}
+
+
+/* welcome to roll a dice text */
+.pp-head span {
+  align-self: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  font-size: clamp(1.3rem, 3.5vw, 35px);
+  margin-inline: auto;
+  text-align: center;
+  padding-top: 10px;
+
+
+
+}
+
+.userDetails h2 {
+  padding-bottom: 10px;
+}
+
+.inputName {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 15px;
+  row-gap: 10px;
+
+
+}
+
+.inputName>label {
+  flex: 1 1 0%;
+  align-items: center;
+
+}
+
+.inputName input { 
+  width: 100%;
+  min-width: 150px;
+  padding: 8px;
+  border-radius: 10px;
+  border-width: 1px;
+  font-weight: 600;
+}
+
+.how-to-play ol {
+  padding-left: 20px;
+   overflow-y: auto;
+   max-height: 20vh;
+}
+
+#submit-user {
+  width: clamp(150px, 40vw, 300px);
+  margin-inline: auto;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: #1F7244;
+  color: white;
+  cursor: pointer;
+}
+#submit-user:hover{
+  filter: brightness(1.2); 
+}
+
+
+
 
 .dice {
   text-align: center;
@@ -65,9 +200,6 @@ main {
   background-image: linear-gradient(to bottom right, #BC3E21, #4F0A14);
   border-radius: 10px;
 
-  /*   position: absolute;
-  top: 300px;
-  left: 850px; */
 }
 
 .Start-Hold {
@@ -204,13 +336,14 @@ input[type="button"]:disabled {
 
 
 @media screen and (min-width:768px) {
-  main { 
-    flex-direction: row; 
-    justify-content: space-evenly; 
-    gap: 25px; 
+  main {
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 25px;
     padding-inline: 10%;
   }
-  #Face{
+
+  #Face {
     height: 90px;
   }
 

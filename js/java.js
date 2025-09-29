@@ -1,10 +1,13 @@
 let running = false;
+let enableLog = true;
 var activeplayer = 0;
 var sum = 0;
 let cs = [0, 0]; //current score list
 let ts = [0, 0]; //total score list
 const limit = 20;
 var flag = 0;
+/* change debugDontSkipAtOne flag to "false" when on production or hosting */
+const debugDontSkipAtOne = true;
 
 
 var rollBtnOne = document.getElementById("rollOne");
@@ -20,6 +23,47 @@ var diceLogo = document.getElementById("Face");
 let shouldScroll = true; //should scroll to active location when taping on rollon
 
 var versusImg = document.getElementById("versusImg");
+/* instructions button */
+const btnShowPopUp = document.getElementById("btnShowPopUp");
+
+/* input fields */
+const playerOneName = document.getElementById("player-one-name");
+const playerTwoName = document.getElementById("player-two-name");
+
+/* place holders */
+const playerOnePlaceholder = document.getElementById("player-one-placeholder");
+const playerTwoPlaceholder = document.getElementById("player-two-placeholder");
+
+/* user submit button */
+const submitUserBtn = document.getElementById("submit-user");
+
+const popUpContent = document.querySelector(".popUpContent");
+/* to show and hide the popup  */
+btnShowPopUp.addEventListener("click", () => {
+    popUpContent.classList.toggle("close");
+    enableLog && console.log(popUpContent);
+});
+/* default names */
+let Player1 = "PLAYER 1";
+let Player2 = "PLAYER 2";
+/* to submit user names */
+function setUsers() {
+    if (playerOneName.value.trim() != "") {
+        Player1 = playerOneName.value;
+        playerOnePlaceholder.textContent = Player1.toUpperCase();
+    }
+    if (playerTwoName.value.trim() != "") {
+        Player2 = playerTwoName.value;
+        playerTwoPlaceholder.textContent = Player2.toUpperCase();
+    }
+    closePopUp();
+}
+
+/* function to close popup */
+function closePopUp() {
+    popUpContent.classList.add("close");
+}
+
 // disabling all buttons initially 
 disableAllButtons();
 function disableAllButtons() {
@@ -138,6 +182,16 @@ function stopGame() {
     start.style.background = '#33B30F';
     start.value = "Start Game";
 
+    /* setting default player names */
+    setDefaultPlayerNames();
+}
+
+function setDefaultPlayerNames() {
+    Player1 = "PLAYER 1";
+    playerOnePlaceholder.textContent = Player1;
+    Player2 = "PLAYER 2";
+    playerTwoPlaceholder.textContent = Player2;
+
 }
 
 let diceRotation = 0;
@@ -232,11 +286,11 @@ function rollOne() {
 
         }
         //set current score to zero when we get one on dice
-        if (diceValue == 1) {
+        if (diceValue == 1 && debugDontSkipAtOne == false) {
             // sum=0;
             cs[0] = 0;
 
-            // alert("nextplayer")
+
             document.getElementById("cs1").innerHTML = cs[0];
             boxOne.style.boxShadow = "";
             boxTwo.style.boxShadow = "0px 0px  30px 15px lightgreen";
@@ -284,10 +338,10 @@ function rollTwo() {
             cs[1] = cs[1] + diceValue;
             document.getElementById("cs2").innerHTML = cs[1];
         }
-        if (diceValue == 1) {
+        if (diceValue == 1 && debugDontSkipAtOne == false) {
 
             cs[1] = 0;
-            // alert("nextplayer")
+
 
             document.getElementById("cs2").innerHTML = cs[1];
             boxOne.style.boxShadow = "0px 0px  30px 15px lightgreen";
@@ -316,7 +370,7 @@ function hold() {
         activeplayer = 1;
         updateButtons();
         if (ts[0] >= 100) {
-            alert("Player 1 wins");
+            alert(`${Player1} wins`);
             stopGame();
 
         }
@@ -335,7 +389,8 @@ function hold() {
         activeplayer = 0;
         updateButtons();
         if (ts[1] >= 100) {
-            alert("Player 2 wins");
+            alert(`${Player2} wins`);
+
             stopGame();
         }
     }
