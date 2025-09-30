@@ -1,13 +1,17 @@
 let running = false;
-let enableLog = true;
 var activeplayer = 0;
 var sum = 0;
 let cs = [0, 0]; //current score list
 let ts = [0, 0]; //total score list
 const limit = 20;
 var flag = 0;
-/* change debugDontSkipAtOne flag to "false" when on production or hosting */
-const debugDontSkipAtOne = false;
+
+/* debug testing variables */
+let enableLog = true; /* to see console.log */
+
+const targetToWin = 100;/* 100 is the default win for a player, while hosting set 100 */
+
+const debugDontSkipAtOne = false;/* change debugDontSkipAtOne flag to "false" when on production or hosting , this flag when false helps to skip to the next user when dice shows "one" */
 
 
 var rollBtnOne = document.getElementById("rollOne");
@@ -33,31 +37,42 @@ const playerTwoName = document.getElementById("player-two-name");
 /* place holders */
 const playerOnePlaceholder = document.getElementById("player-one-placeholder");
 const playerTwoPlaceholder = document.getElementById("player-two-placeholder");
-
+/* name in the congrats popup */
+const playerWon = document.querySelector("#congrats-alert .player-name");
 /* user submit button */
 const submitUserBtn = document.getElementById("submit-user");
 
 const popUpContent = document.querySelector(".popUpContent");
-/* to show and hide the popup  */
+
+/* to show and hide the congrats popup  */
+const popover = document.getElementById("congrats-alert");
+
+/* show popup always during debug */
+// enableLog  && popover.showPopover();
+
+
 
 /* default names */
 let Player1 = "PLAYER 1";
 let Player2 = "PLAYER 2";
 /* to submit user names */
-function setUsers() {
-    if (playerOneName.value.trim() != "") {
-        Player1 = playerOneName.value;
-        playerOnePlaceholder.textContent = Player1.toUpperCase();
-    }
-    if (playerTwoName.value.trim() != "") {
-        Player2 = playerTwoName.value;
-        playerTwoPlaceholder.textContent = Player2.toUpperCase();
-    }
+function setUsers(event) {
+    event.preventDefault();
+
+    Player1 = playerOneName.value.trim() || "PLAYER 1";
+    playerOnePlaceholder.textContent = Player1.toUpperCase();
+
+
+    Player2 = playerTwoName.value || "PLAYER 2";
+    playerTwoPlaceholder.textContent = Player2.toUpperCase();
+
     closePopUp();
+    /* clearing input fields after submit */
+    event.target.reset();
 }
 
 /* function to show popup */
-function showPopup() {
+function showStartPopup() {
     popUpContent.classList.add("open");
 }
 /* function to close popup */
@@ -135,7 +150,7 @@ function GameStart() {
 
     if (!running) {
         /* show popup only when game not already running  */
-        showPopup();
+        showStartPopup();
         //clearing values only while starting not stoping so that we can see our scores onces finished
         clearAllValues();
 
@@ -167,9 +182,9 @@ function GameStart() {
 function stopGame() {
     if (mediaQuery.matches) {
         versusImg.style.height = "70px";
-        
-    }else{
-        
+
+    } else {
+
         versusImg.style.height = "40px";
     }
     // versusImg.style.transform = `rotate(0deg) scale(1)`;
@@ -243,7 +258,7 @@ function checkIfTablet() {
 // function to choose the target image to show dice based on the screen size 
 function chooseTargetImage() {
     if (mediaQuery.matches) {
-        var targetImage = diceLogo; 
+        var targetImage = diceLogo;
         // versusImg.style.height = "40px"; 
         versusImg.src = "images/vs.png";
 
@@ -376,8 +391,12 @@ function hold() {
         boxTwo.style.boxShadow = "0px 0px  30px 15px lightgreen";
         activeplayer = 1;
         updateButtons();
-        if (ts[0] >= 100) {
-            alert(`${Player1} wins`);
+        if (ts[0] >= targetToWin) {
+            playerWon.textContent = Player1 || "Player 1 ";
+
+            popover.showPopover();
+
+
             stopGame();
 
         }
@@ -395,8 +414,12 @@ function hold() {
         boxTwo.style.boxShadow = "";
         activeplayer = 0;
         updateButtons();
-        if (ts[1] >= 100) {
-            alert(`${Player2} wins`);
+        if (ts[1] >= targetToWin) {
+            playerWon.textContent = Player2 || "Player 2 ";
+
+
+            popover.showPopover();
+
 
             stopGame();
         }
