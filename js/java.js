@@ -9,9 +9,9 @@ var flag = 0;
 /* debug testing variables */
 let enableLog = true; /* to see console.log */
 
-const targetToWin = 1;/* 100 is the default win for a player, while hosting set 100 */
+const targetToWin = 100;/* 100 is the default win for a player, while hosting set 100 */
 
-const debugDontSkipAtOne = true;/* change debugDontSkipAtOne flag to "false" when on production or hosting , this flag when false helps to skip to the next user when dice shows "one" */
+const debugDontSkipAtOne = false;/* change debugDontSkipAtOne flag to "false" when on production or hosting , this flag when false helps to skip to the next user when dice shows "one" */
 
 
 var rollBtnOne = document.getElementById("rollOne");
@@ -394,7 +394,7 @@ function hold() {
         activeplayer = 1;
         updateButtons();
         if (ts[0] >= targetToWin) {
- 
+            /* show popup */
             popover.showPopover();
     
 

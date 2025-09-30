@@ -50,8 +50,11 @@ body {
   /* scrollbar-width: none; */
   padding: 15px 25px;
   gap: 16px;
-  animation: popupAnimation 0.5s ease forwards;
+  animation: popupAnimation 0.5s ease forwards; 
 }
+
+
+
 
 @keyframes popupAnimation {
   from {
