@@ -9,9 +9,9 @@ var flag = 0;
 /* debug testing variables */
 let enableLog = true; /* to see console.log */
 
-const targetToWin = 100;/* 100 is the default win for a player, while hosting set 100 */
+const targetToWin = 1;/* 100 is the default win for a player, while hosting set 100 */
 
-const debugDontSkipAtOne = false;/* change debugDontSkipAtOne flag to "false" when on production or hosting , this flag when false helps to skip to the next user when dice shows "one" */
+const debugDontSkipAtOne = true;/* change debugDontSkipAtOne flag to "false" when on production or hosting , this flag when false helps to skip to the next user when dice shows "one" */
 
 
 var rollBtnOne = document.getElementById("rollOne");
@@ -48,7 +48,7 @@ const popUpContent = document.querySelector(".popUpContent");
 const popover = document.getElementById("congrats-alert");
 
 /* show popup always during debug */
-// enableLog  && popover.showPopover();
+//  popover.showPopover();
 
 
 
@@ -381,6 +381,8 @@ function rollTwo() {
 
 
 function hold() {
+    var congratsLottie = document.querySelector(".congrats-lottie");
+
     if (flag == 1 && activeplayer == 0) {
 
         ts[0] = ts[0] + cs[0];
@@ -392,10 +394,11 @@ function hold() {
         activeplayer = 1;
         updateButtons();
         if (ts[0] >= targetToWin) {
-            playerWon.textContent = Player1 || "Player 1 ";
-
+ 
             popover.showPopover();
+    
 
+            playerWon.textContent = Player1 || "Player 1 ";
 
             stopGame();
 
@@ -415,10 +418,10 @@ function hold() {
         activeplayer = 0;
         updateButtons();
         if (ts[1] >= targetToWin) {
+            /* show popup */
             playerWon.textContent = Player2 || "Player 2 ";
-
-
             popover.showPopover();
+      
 
 
             stopGame();

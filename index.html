@@ -4,9 +4,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+
     <!-- for lottie -->
-    <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> -->
+    <!-- for lottie player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <!-- for lottie as  dotlottie-wc-->
     <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
+
     <!-- manifest -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="images/app_icons/dice512.png">
@@ -63,17 +67,16 @@
     <!-- 🔝poup -->
 
 
-    <!-- popup when someone wins --> 
+    <!-- popup when someone wins -->
     <div class="player-won" id="congrats-alert" popover>
-        <h2>Congratulations</h2>
-        <dotlottie-wc class="congrats-lottie"
-            src="https://lottie.host/39d182b8-6a95-447b-bcbe-0e644ab28b94/7aR3XKTL9x.lottie"
-            autoplay loop></dotlottie-wc>
-        <span class="player-name">Player1</span>
-
+        <h2>Congratulations</h2> 
+        <lottie-player class="congrats-lottie" src="images/lottie/Confetti.json" background="transparent" speed="1"
+            loop autoplay></lottie-player> 
+        <span class="player-name">Player1</span> 
         <span>Won</span>
 
     </div>
+
     <div id="diceFace" class="dice">
         <img id="Face" src="images/Red-Dice-PNG-Transparent-File.png" alt="Dice">
     </div>

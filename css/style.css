@@ -225,15 +225,37 @@ body {
   align-items: center;
   gap: 7px;
   overflow: visible;
+  -webkit-backdrop-filter: blur(5x);
+  backdrop-filter: blur(5x);
 }
-#congrats-alert:popover-close{
+
+#congrats-alert:popover-close {
   visibility: none;
 }
+
+#congrats-alert::backdrop {
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+
+
 .congrats-lottie {
-  position: absolute;
-  top: -125px;
+  position: fixed;
+  margin: auto;
+  inset: 0;
   width: 300px;
   height: 300px;
+
+}
+
+
+
+
+.congrats-lottie:host>canvas {
+  height: min-content;
+  max-height: 100px;
+
 }
 
 .player-name {
