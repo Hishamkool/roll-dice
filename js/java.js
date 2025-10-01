@@ -78,7 +78,7 @@ function showStartPopup() {
 /* function to close popup */
 function closePopUp() {
     popUpContent.classList.remove("open");
-    console.log(popUpContent);
+
 }
 
 // disabling all buttons initially 
@@ -396,7 +396,7 @@ function hold() {
         if (ts[0] >= targetToWin) {
             /* show popup */
             popover.showPopover();
-    
+
 
             playerWon.textContent = Player1 || "Player 1 ";
 
@@ -421,7 +421,7 @@ function hold() {
             /* show popup */
             playerWon.textContent = Player2 || "Player 2 ";
             popover.showPopover();
-      
+
 
 
             stopGame();
@@ -430,31 +430,31 @@ function hold() {
 
 }
 
-//function to scroll the screen when switching players
+// function to scroll the screen when switching players
 function scrollToActiveLocation() {
 
-    const rollBtnOneLocation = rollBtnOne.getBoundingClientRect().top + window.scrollY;
-    const rolBtnTwoLocation = rollBtnTwo.getBoundingClientRect().top + window.scrollY;
-    const diceBottomLocation = diceLogo.getBoundingClientRect().bottom + window.scrollY;
+
+    const rollTwoTop = rollBtnTwo.getBoundingClientRect().top + window.scrollY;
+
+    const vsBottom = versusImg.getBoundingClientRect().bottom + window.scrollY - window.innerHeight;
+
+
+
     if (activeplayer == 0) {
         window.scrollTo({
-            // top: rollBtnOneLocation - 200,
-            // top: rollBtnOneLocation ,
-            top: diceBottomLocation,
+            top: vsBottom + 70,
             behavior: "smooth",
 
         });
     } else if (activeplayer == 1) {
         window.scrollTo({
-            top: rolBtnTwoLocation + 50,
+            top: rollTwoTop + 50,
             behavior: "smooth",
         });
     }
-
-
-
-
 }
+
+
 
 
 
