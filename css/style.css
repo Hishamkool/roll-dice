@@ -13,21 +13,20 @@
 }
 
 h1 {
-  text-align: center;
-
-  /* color: #CF7621; */
+  text-align: center; 
   color: white;
   font-size: 55px;
   font-weight: 300;
 }
 
 body {
-  background: radial-gradient(circle, #1F7244 4%, #0F3621 100%) no-repeat;
+  background: radial-gradient(circle, #1F7244 4%, #0F3621 100%);
   background-size: cover;
   min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
+
 }
 
 /* popup when game starts to enter player names and all */
@@ -50,7 +49,7 @@ body {
   /* scrollbar-width: none; */
   padding: 15px 25px;
   gap: 16px;
-  animation: popupAnimation 0.5s ease forwards; 
+  animation: popupAnimation 0.5s ease forwards;
 }
 
 
@@ -189,11 +188,21 @@ body {
 
 .how-to-play ol {
   padding-left: 20px;
+
+  gap: 10px;
+}
+
+.how-to-play ol ul {
+  padding-left: 10px;
+}
+
+.how-to-play li {
+  padding-bottom: 10px;
 }
 
 /* submit button */
 #submit-user {
-  margin-block: 16px;
+  margin-block-start: 16px;
   display: flex;
   justify-content: center;
   width: clamp(150px, 40vw, 200px);
@@ -353,6 +362,7 @@ body>main {
   gap: 10px;
   text-align: center;
   padding-bottom: 20px;
+
 }
 
 
@@ -395,6 +405,7 @@ body>main {
 
 
 .button {
+  anchor-name: --roll-btn;
   border-radius: 15px;
   border: none;
   background: #EE4809;
@@ -403,6 +414,61 @@ body>main {
   text-align: center;
   font-size: 16px;
   cursor: pointer;
+}
+
+
+
+.btn-tooltip {
+  position: relative;
+
+}
+
+.tooltip-roll {
+  position-anchor: --roll-btn;
+}
+
+.tooltip-hold {
+  position-anchor: --hold-btn;
+}
+
+.tooltip-roll,
+.tooltip-hold {
+  position: absolute;
+  top: anchor(bottom);
+  left: anchor(left);
+  left: 0;
+  top: 50px;
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 5px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  width: max-content;
+  max-width: 200px;
+  white-space: normal;
+}
+
+/* closest child so using this now , if added div in betweeen remember to change it */
+.button:hover+.tooltip-roll {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.button:hover:not(:disabled) {
+  filter: contrast(1.6);
+}
+
+/* hold button hover show tool tip */
+.hold:hover+.tooltip-hold {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hold:hover:not(:disabled) {
+  filter: contrast(1.6);
 }
 
 
@@ -421,11 +487,10 @@ body>main {
 }
 
 .hold {
+  anchor-name: --hold-btn;
   cursor: pointer;
-
   border-radius: 15px;
   border: none;
-  /* background: #3B9EE1; */
   background-color: rgb(163, 16, 0);
   color: white;
   padding: 15px 32px;
@@ -434,14 +499,19 @@ body>main {
 
 }
 
+
+
 /* disabled button */
 button:disabled,
 input[type="button"]:disabled {
   background-color: rgb(98, 6, 6);
   color: white;
-  cursor: not-allowed;
+  cursor: default;
   opacity: 0.6;
+
 }
+
+
 
 
 @media screen and (min-width:768px) {

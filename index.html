@@ -20,9 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap"
         rel="stylesheet">
-    <title>
-        Dice Game
-    </title>
+    <title>Dice Game</title>
 </head>
 
 <body class="body">
@@ -56,12 +54,23 @@
         <div class="how-to-play">
             <h2>How to Play?</h2>
             <ol>
-                <li>The first player to score 100 wins (Total score).</li>
-                <li>Everytime you through the dice the value gets added up to the current score until you get "ONE" on
-                    the dice.</li>
-                <li>if you get "ONE" on your dice your chance is over and all you current score is cleared.</li>
-                <li>Be wise and hold your current score, to save it as you total score.</li>
+                <li>Two players take turns rolling the dice.</li>
+                <li>On your turn, click <strong>Roll</strong>:
+                    <ul>
+                        <li>The number you roll is added to your <em>Current Score</em>.</li>
+                        <li>If you roll a <strong>1</strong>, you lose all points in your <em>Current Score</em> and
+                            your turn ends immediately.</li>
+                    </ul>
+                </li>
+                <li>At any time during your turn, you can click <strong>Hold</strong>:
+                    <ul>
+                        <li>Your <em>Current Score</em> is added to your <em>Total Score</em>.</li>
+                        <li>Your turn ends and the next player starts rolling.</li>
+                    </ul>
+                </li>
+                <li>The first player to reach <strong>100 points in Total Score</strong> wins the game!</li>
             </ol>
+
         </div>
     </div>
     <!-- 🔝poup -->
@@ -69,10 +78,10 @@
 
     <!-- popup when someone wins -->
     <div class="player-won" id="congrats-alert" popover>
-        <h2>Congratulations</h2> 
-        <lottie-player class="congrats-lottie" src="images/lottie/Confetti.json" background="transparent" speed="1"
-            loop autoplay></lottie-player> 
-        <span class="player-name">Player1</span> 
+        <h2>Congratulations</h2>
+        <lottie-player class="congrats-lottie" src="images/lottie/Confetti.json" background="transparent" speed="1" loop
+            autoplay></lottie-player>
+        <span class="player-name">Player1</span>
         <span>Won</span>
 
     </div>
@@ -103,8 +112,17 @@
                 </div>
             </div>
             <div class="rollon">
-                <button type="button" id="rollOne" class="button" onclick="rollOne()">Roll On </button>
-                <input type="button" class="hold" value="Hold" id="holdOne" onclick="hold()"></input>
+                <div class="btn-tooltip">
+                    <button type="button" id="rollOne" class="button" onclick="rollOne()">Roll On
+                    </button>
+                    <span class="tooltip-roll">Roll the dice to add to your Current Score</span>
+                </div>
+
+                <div class="btn-tooltip">
+                    <input type="button" class="hold" value="Hold" id="holdOne" onclick="hold()"></input>
+                    <span class="tooltip-hold">Save your Current score to Total score and end your run</span>
+                </div>
+
             </div>
         </div>
         <div class="vs">
@@ -131,9 +149,16 @@
                 </div>
             </div>
             <div class="rollon">
-                <!-- <button class="button">Roll On</button>     -->
-                <button type="button" id="rollTwo" class="button" onclick="rollTwo()">Roll On </button>
-                <input type="button" class="hold" value="Hold" id="holdTwo" onclick="hold()"></input>
+                <div class="btn-tooltip">
+                    <button type="button" id="rollTwo" class="button" onclick="rollTwo()">Roll On
+                    </button>
+                    <span class="tooltip-roll">Roll the dice to add to your Current Score</span>
+                </div>
+
+                <div class="btn-tooltip">
+                    <input type="button" class="hold" value="Hold" id="holdTwo" onclick="hold()"></input>
+                    <span class="tooltip-hold">Save your Current score to Total score and end your run</span>
+                </div>
             </div>
         </div>
     </main>
