@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Bitcount Grid Double", 'Courier New', Courier, monospace;
-
+  /* to remove selection */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -375,6 +375,7 @@ body>main {
   gap: 10px;
   text-align: center;
   padding-bottom: 20px;
+  padding-inline:5px ;
 
 }
 
