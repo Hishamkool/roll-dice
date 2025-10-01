@@ -3,6 +3,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Bitcount Grid Double", 'Courier New', Courier, monospace;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 :root {
@@ -331,7 +338,6 @@ main {
   margin-inline: auto;
   margin-bottom: 20px;
   width: 100%;
-
 }
 
 /* body>.Start-Hold {
@@ -454,36 +460,43 @@ body>main {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
- /*  width: max-content;
+  /*  width: max-content;
   max-width: 200px;
   white-space: wrap; */
   z-index: 12;
-}
-
-/* closest child so using this now , if added div in betweeen remember to change it */
-.button:hover+.tooltip-roll {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 .button:hover:not(:disabled) {
   filter: contrast(1.6);
 }
 
-/* hold button hover show tool tip */
-.hold:hover+.tooltip-hold {
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .hold:hover:not(:disabled) {
   filter: contrast(1.6);
 }
 
+@media (hover:hover) {
+
+  /* closest child so using this now , if added div in betweeen remember to change it */
+  .button:hover+.tooltip-roll {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+
+
+  /* hold button hover show tool tip */
+  .hold:hover+.tooltip-hold {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+
+
 
 /* styling for start and stop buttons */
 .start {
-  background: #33B30F;
+  background: #279a07;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   border-radius: 15px;
   border: none;
@@ -493,6 +506,9 @@ body>main {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
+  box-shadow: 1px 6px 5px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.2);
+
 }
 
 .start:hover {
